@@ -1,0 +1,2 @@
+Coords of finish (can press E to end game from this pos/rot):
+pos = 706 -200 305, rot = 240

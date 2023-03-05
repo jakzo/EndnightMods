@@ -1,0 +1,35 @@
+{
+  "omnisharp.useModernNet": false,
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "clang-format.language.csharp.fallbackStyle": "LLVM",
+  "[csharp]": {
+    "editor.defaultFormatter": "mjohns.clang-format"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "clang-format.assumeFilename": "Name.cs",
+  "clang-format.language.csharp.enable": true,
+  "clang-format.language.apex.enable": false,
+  "clang-format.language.c.enable": false,
+  "clang-format.language.cpp.enable": false,
+  "clang-format.language.cuda.enable": false,
+  "clang-format.language.glsl.enable": false,
+  "clang-format.language.hlsl.enable": false,
+  "clang-format.language.java.enable": false,
+  "clang-format.language.javascript.enable": false,
+  "clang-format.language.objective-cpp.enable": false,
+  "clang-format.language.proto.enable": false,
+  "clang-format.language.typescript.enable": false,
+  "clang-format.language.objective-c.enable": false
+}

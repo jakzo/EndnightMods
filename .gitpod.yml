@@ -1,0 +1,12 @@
+image: gitpod/workspace-dotnet
+tasks:
+  - name: Dependencies
+    init: nuget restore EndnightMods.sln
+    openMode: split-right
+vscode:
+  extensions:
+    - muhammad-sammy.csharp
+    - esbenp.prettier-vscode
+    - xaver.clang-format
+    - streetsidesoftware.code-spell-checker
+    - redhat.vscode-xml

@@ -1,0 +1,7 @@
+{
+  "name": "KelvinCloner",
+  "version_number": "0.0.0",
+  "description": "Allows having multiple helpers.",
+  "website_url": "https://github.com/jakzo/EndnightMods/tree/main/projects/Sons/KelvinCloner",
+  "dependencies": ["BepInEx-BepInExPack_IL2CPP-6.0.667"]
+}

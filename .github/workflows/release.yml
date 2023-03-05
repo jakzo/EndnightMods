@@ -1,0 +1,69 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      game:
+        description: Game folder name (defaults to "Sons")
+        required: true
+        default: Sons
+      project:
+        description: Project folder name (eg. "KelvinCloner").
+        required: true
+      versionBumpType:
+        description: Can be MAJOR, MINOR or PATCH.
+        required: true
+        default: PATCH
+      changelogDescription:
+        description: Markdown to add to changelog.
+        required: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    environment: Release
+    outputs:
+      release_upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up toolchain
+        run: sudo apt install -y mono-devel
+      - name: Install dependencies
+        run: nuget restore EndnightMods.sln
+      - name: Bump version
+        id: bump_version
+        env:
+          GAME: ${{ github.event.inputs.game }}
+          PROJECT: ${{ github.event.inputs.project }}
+          VERSION_BUMP_TYPE: ${{ github.event.inputs.versionBumpType }}
+          CHANGELOG_DESCRIPTION: ${{ github.event.inputs.changelogDescription }}
+        run: csi ./scripts/Release.csx "$GAME" "$PROJECT" "$VERSION_BUMP_TYPE" "$CHANGELOG_DESCRIPTION"
+      - name: Build
+        run: msbuild /property:Configuration=Release
+      - name: Upload to Thunderstore
+        if: steps.bump_version.outputs.release_thunderstore == 'true'
+        env:
+          GAME: ${{ github.event.inputs.game }}
+          PROJECT: ${{ github.event.inputs.project }}
+          NEW_VERSION: ${{ steps.bump_version.outputs.new_version }}
+          THUNDERSTORE_API_TOKEN: ${{ secrets.THUNDERSTORE_API_TOKEN }}
+        run: csi ./scripts/UploadThunderstore.csx "$GAME" "$PROJECT" "$NEW_VERSION"
+      - name: Commit version bump
+        run: |
+          set -eux
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Release" --no-verify
+          git push --no-verify
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          target_commitish: ${{ github.sha }}
+          tag_name: "${{ github.event.inputs.game }}${{ github.event.inputs.project }}_v${{ steps.bump_version.outputs.new_version }}"
+          body: ${{ steps.bump_version.outputs.changelog }}
+          files: |
+            ./projects/${{ github.event.inputs.game }}/${{ github.event.inputs.project }}/thunderstore/*.zip
+            ./projects/${{ github.event.inputs.game }}/${{ github.event.inputs.project }}/bin/Release/${{ github.event.inputs.project }}.dll

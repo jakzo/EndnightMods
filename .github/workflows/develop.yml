@@ -1,0 +1,36 @@
+name: Develop build
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    environment: Develop
+    outputs:
+      release_upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up toolchain
+        run: sudo apt install -y mono-devel
+      - name: Install dependencies
+        run: nuget restore EndnightMods.sln
+      - name: Build
+        run: msbuild
+      - name: Prepare for release
+        run: csi ./scripts/CopyBuildsToBin.csx
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          target_commitish: ${{ github.sha }}
+          tag_name: dev_${{ github.run_number }}
+          body: >
+            **DO NOT DOWNLOAD** unless either I told you to or you know what you're doing. Instead look these mods up on Thunderstore and download them from there.
+
+            These are testing builds used for development of the mods. They contain the most recent changes which are usually untested and broken. Use at your own risk.
+          files: ./bin/*.dll
