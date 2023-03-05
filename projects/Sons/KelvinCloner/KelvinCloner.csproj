@@ -46,6 +46,9 @@
     <Reference Include="Cpp2IL.Core">
       <HintPath>..\..\..\references\BepInEx\Cpp2IL.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>..\..\..\references\BepInEx\Il2CppInterop.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="BepInEx.Preloader.Core">
       <HintPath>..\..\..\references\BepInEx\BepInEx.Preloader.Core.dll</HintPath>
     </Reference>
@@ -60,9 +63,6 @@
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\..\references\Sons\Il2Cppmscorlib.dll</HintPath>
-    </Reference>
-    <Reference Include="Il2CppInterop.Runtime">
-      <HintPath>..\..\..\references\Sons\Il2CppInterop.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\references\Sons\UnityEngine.CoreModule.dll</HintPath>
