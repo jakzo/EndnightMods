@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+    Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{475311AE-9F9A-50B4-EAE4-1271319D6E2D}</ProjectGuid>
@@ -58,6 +59,9 @@
     <Reference Include="BepInEx.Unity.IL2CPP">
       <HintPath>..\..\..\references\BepInEx\BepInEx.Unity.IL2CPP.dll</HintPath>
     </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\references\BepInEx\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\..\references\Sons\Il2Cppmscorlib.dll</HintPath>
     </Reference>
@@ -70,17 +74,25 @@
     <Reference Include="Sons">
       <HintPath>..\..\..\references\Sons\Sons.dll</HintPath>
     </Reference>
+    <Reference Include="bolt">
+      <HintPath>..\..\..\references\Sons\bolt.dll</HintPath>
+    </Reference>
+    <Reference Include="bolt.user">
+      <HintPath>..\..\..\references\Sons\bolt.user.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppVersion.cs" />
     <Compile Include="src/**/*.cs" />
     <Compile Include="../../../common/Utilities/Metadata.cs" />
     <Compile Include="../../../common/Utilities/Log.cs" />
+    <Compile Include="../../../common/Utilities/Input.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
     <PostBuildEvent>
-      COPY "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Sons Of The Forest\BepInEx\plugins"
+      COPY "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Sons Of The
+      Forest\BepInEx\plugins"
     </PostBuildEvent>
   </PropertyGroup>
 </Project>

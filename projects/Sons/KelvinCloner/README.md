@@ -1,9 +1,11 @@
 Press `ALT + K` to spawn a new Kelvin and build your own army of workers.
 
+Hold `ALT` while giving an order to broadcast it to all Kelvins. You only need to hold `ALT` when pressing the interact button, not while selecting on the notepad.
+
 Notes:
 
 - Spawned Kelvins persist across saves. 👌
-- There is no hotkey to despawn Kelvins. If you need to do that, well... You know what you have to do. 💀
+- There is no hotkey to despawn Kelvins. If you need to do that, well... you know what you have to do. 💀
 - I haven't tested with multiplayer but I think it might work. 🤷
 
 # Installation

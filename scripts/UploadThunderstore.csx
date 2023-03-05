@@ -15,10 +15,6 @@ try {
   var thunderstoreGameName =
       game.ToLower() == "sons" ? "sons-of-the-forest" : ":::unknown:::";
 
-  var readme = File.ReadAllText($"{projectRelativePath}/README.md");
-  var changelog = File.ReadAllText($"{projectRelativePath}/CHANGELOG.md");
-  File.WriteAllText($"{projectRelativePath}/thunderstore/README.md",
-                    $"{readme}\n# Changelog\n\n{changelog}");
   var MODS_DIR = $"{projectRelativePath}/thunderstore/Mods";
   if (Directory.Exists(MODS_DIR))
     Directory.Delete(MODS_DIR, true);
@@ -36,8 +32,9 @@ try {
                             "manifest.json");
     zip.CreateEntryFromFile($"{projectRelativePath}/thunderstore/icon.png",
                             "icon.png");
-    zip.CreateEntryFromFile($"{projectRelativePath}/thunderstore/README.md",
-                            "README.md");
+    zip.CreateEntryFromFile($"{projectRelativePath}/README.md", "README.md");
+    zip.CreateEntryFromFile($"{projectRelativePath}/CHANGELOG.md",
+                            "CHANGELOG.md");
     zip.CreateEntryFromFile(
         $"{projectRelativePath}/thunderstore/Mods/{binaryName}",
         $"Mods/{binaryName}");
