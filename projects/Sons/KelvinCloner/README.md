@@ -4,7 +4,7 @@ Notes:
 
 - Spawned Kelvins persist across saves. 👌
 - There is no hotkey to despawn Kelvins. If you need to do that, well... You know what you have to do. 💀
-- I haven't tested with multiplayer but I think it might work (probably just some animation bugs when spawning). 🤷
+- I haven't tested with multiplayer but I think it might work. 🤷
 
 # Installation
 

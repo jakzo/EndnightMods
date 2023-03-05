@@ -58,47 +58,17 @@
     <Reference Include="BepInEx.Unity.IL2CPP">
       <HintPath>..\..\..\references\BepInEx\BepInEx.Unity.IL2CPP.dll</HintPath>
     </Reference>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\references\BepInEx\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\..\references\Sons\Il2Cppmscorlib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\references\Sons\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>..\..\..\references\Sons\UnityEngine.AnimationModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>..\..\..\references\Sons\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="Sons">
       <HintPath>..\..\..\references\Sons\Sons.dll</HintPath>
-    </Reference>
-    <Reference Include="Sons.Ai.Vail">
-      <HintPath>..\..\..\references\Sons\Sons.Ai.Vail.dll</HintPath>
-    </Reference>
-    <Reference Include="Sons.Gameplay.GameSetup">
-      <HintPath>..\..\..\references\Sons\Sons.Gameplay.GameSetup.dll</HintPath>
-    </Reference>
-    <Reference Include="Sons.Animation.Mae">
-      <HintPath>..\..\..\references\Sons\Sons.Animation.Mae.dll</HintPath>
-    </Reference>
-    <Reference Include="TheForest.Utils">
-      <HintPath>..\..\..\references\Sons\TheForest.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="Endnight">
-      <HintPath>..\..\..\references\Sons\Endnight.dll</HintPath>
-    </Reference>
-    <Reference Include="bolt">
-      <HintPath>..\..\..\references\Sons\bolt.dll</HintPath>
-    </Reference>
-    <Reference Include="bolt.user">
-      <HintPath>..\..\..\references\Sons\bolt.user.dll</HintPath>
-    </Reference>
-    <Reference Include="AstarPathfindingProject">
-      <HintPath>..\..\..\references\Sons\AstarPathfindingProject.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -386,3 +386,5 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sw?
+
+secret-*

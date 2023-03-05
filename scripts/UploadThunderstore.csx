@@ -13,7 +13,7 @@ try {
   var newVersion = Args[2];
   var projectRelativePath = Path.Combine("projects", game, project);
   var thunderstoreGameName =
-      game == "Sons" ? "sons-of-the-forest" : ":::unknown:::";
+      game.ToLower() == "sons" ? "sons-of-the-forest" : ":::unknown:::";
 
   var readme = File.ReadAllText($"{projectRelativePath}/README.md");
   var changelog = File.ReadAllText($"{projectRelativePath}/CHANGELOG.md");
@@ -24,7 +24,8 @@ try {
     Directory.Delete(MODS_DIR, true);
   Directory.CreateDirectory(MODS_DIR);
   var binaryName = $"{project}.dll";
-  File.Copy($"{projectRelativePath}/bin/Release/{binaryName}", MODS_DIR);
+  File.Copy($"{projectRelativePath}/bin/Release/{binaryName}",
+            $"{MODS_DIR}/{binaryName}");
 
   Console.WriteLine("Thunderstore files copied");
 
@@ -56,8 +57,7 @@ try {
   async Task<T> Post<T>(string url, object body) {
     var res = await client.SendAsync(new HttpRequestMessage {
       Method = HttpMethod.Post,
-      RequestUri = new Uri(
-          $"https://{thunderstoreGameName}.thunderstore.io/api/experimental{url}"),
+      RequestUri = new Uri($"https://thunderstore.io/api/experimental{url}"),
       Content = new StringContent(JsonConvert.SerializeObject(body),
                                   Encoding.UTF8, "application/json"),
       Headers =
@@ -102,7 +102,7 @@ try {
   var submitBody = new {
     upload_uuid = uuid,
     author_name = "jakzo",
-    categories = new string[] { "code-mods" },
+    categories = new string[] { "mods" },
     communities = new string[] { thunderstoreGameName },
     has_nsfw_content = false,
   };
