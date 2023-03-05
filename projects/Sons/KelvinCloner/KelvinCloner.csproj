@@ -58,8 +58,8 @@
     <Reference Include="0Harmony">
       <HintPath>..\..\..\references\BepInEx\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="IL2Cppmscorlib">
-      <HintPath>..\..\..\references\Sons\IL2Cppmscorlib.dll</HintPath>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>..\..\..\references\Sons\Il2Cppmscorlib.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppInterop.Runtime">
       <HintPath>..\..\..\references\Sons\Il2CppInterop.Runtime.dll</HintPath>
