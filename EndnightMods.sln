@@ -6,6 +6,8 @@ Project("{99DBB66E-FA56-4346-93A6-D79BF4F507FD}") = "Scripts", "scripts\Scripts.
 EndProject
 Project("{48667BFD-B03D-9E23-5BB9-C8B2F40F8C7A}") = "SonsKelvinCloner", "projects\Sons\KelvinCloner\KelvinCloner.csproj", "{475311AE-9F9A-50B4-EAE4-1271319D6E2D}"
 EndProject
+Project("{66858121-F968-1C3A-22C9-D1F0C9865E04}") = "SonsDec", "projects\Sons\Decompiled\Decompiled.csproj", "{E1687ACB-FAE1-C2D2-83EB-1E4C014EAB37}"
+EndProject
 
 Global
   GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,11 @@ Global
     Release|Any CPU = Release|Any CPU
   EndGlobalSection
   GlobalSection(ProjectConfigurationPlatforms) = postSolution
+    {E1687ACB-FAE1-C2D2-83EB-1E4C014EAB37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+    {E1687ACB-FAE1-C2D2-83EB-1E4C014EAB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+    {E1687ACB-FAE1-C2D2-83EB-1E4C014EAB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+    {E1687ACB-FAE1-C2D2-83EB-1E4C014EAB37}.Release|Any CPU.Build.0 = Release|Any CPU
+
     {475311AE-9F9A-50B4-EAE4-1271319D6E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
     {475311AE-9F9A-50B4-EAE4-1271319D6E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
     {475311AE-9F9A-50B4-EAE4-1271319D6E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU

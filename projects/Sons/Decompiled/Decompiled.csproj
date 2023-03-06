@@ -4,14 +4,15 @@
     Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ProjectGuid>{475311AE-9F9A-50B4-EAE4-1271319D6E2D}</ProjectGuid>
+    <ProjectGuid>{E1687ACB-FAE1-C2D2-83EB-1E4C014EAB37}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KelvinCloner</RootNamespace>
-    <AssemblyName>KelvinCloner</AssemblyName>
+    <RootNamespace>Decompiled</RootNamespace>
+    <AssemblyName>Decompiled</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NoWarn>$(NoWarn);CS0108</NoWarn>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -41,26 +42,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="BepInEx.Core">
-      <HintPath>..\..\..\references\BepInEx\BepInEx.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Cpp2IL.Core">
-      <HintPath>..\..\..\references\BepInEx\Cpp2IL.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Il2CppInterop.Runtime">
       <HintPath>..\..\..\references\BepInEx\Il2CppInterop.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx.Preloader.Core">
-      <HintPath>..\..\..\references\BepInEx\BepInEx.Preloader.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx.Unity.Common">
-      <HintPath>..\..\..\references\BepInEx\BepInEx.Unity.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx.Unity.IL2CPP">
-      <HintPath>..\..\..\references\BepInEx\BepInEx.Unity.IL2CPP.dll</HintPath>
-    </Reference>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\references\BepInEx\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\..\references\Sons\Il2Cppmscorlib.dll</HintPath>
@@ -74,17 +57,23 @@
     <Reference Include="UnityEngine.AnimationModule">
       <HintPath>..\..\..\references\Sons\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\..\references\Sons\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
     <Reference Include="Sons">
       <HintPath>..\..\..\references\Sons\Sons.dll</HintPath>
     </Reference>
-    <Reference Include="Sons.Gui">
-      <HintPath>..\..\..\references\Sons\Sons.Gui.dll</HintPath>
+    <Reference Include="Sons.Ai.Vail">
+      <HintPath>..\..\..\references\Sons\Sons.Ai.Vail.dll</HintPath>
     </Reference>
     <Reference Include="Sons.Input">
       <HintPath>..\..\..\references\Sons\Sons.Input.dll</HintPath>
     </Reference>
-    <Reference Include="Sons.Ai.Vail">
-      <HintPath>..\..\..\references\Sons\Sons.Ai.Vail.dll</HintPath>
+    <Reference Include="Sons.Gui">
+      <HintPath>..\..\..\references\Sons\Sons.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="TheForest.Utils">
+      <HintPath>..\..\..\references\Sons\TheForest.Utils.dll</HintPath>
     </Reference>
     <Reference Include="bolt">
       <HintPath>..\..\..\references\Sons\bolt.dll</HintPath>
@@ -94,16 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppVersion.cs" />
     <Compile Include="src/**/*.cs" />
-    <Compile Include="../../../common/Utilities/Metadata.cs" />
-    <Compile Include="../../../common/Utilities/Log.cs" />
-    <Compile Include="../../../common/Utilities/Input.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
-    <PostBuildEvent>
-      COPY "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Sons Of The Forest\BepInEx\plugins"
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>
