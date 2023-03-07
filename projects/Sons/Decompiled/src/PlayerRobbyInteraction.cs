@@ -12,7 +12,7 @@ using Bolt;
 
 namespace Decompiled.Gameplay {
 class _PlayerRobbyInteraction : PlayerRobbyInteraction {
-  void CreatePadAndPenIfNeeded() {
+  RobbyWorldUi CreatePadAndPenIfNeeded() {
     if (!_tactiPad) {
       _tactiPad = GameObject.Instantiate(_guiPrefab);
       _tactiPad.gameObject.active = false;
@@ -32,6 +32,7 @@ class _PlayerRobbyInteraction : PlayerRobbyInteraction {
       _tactiPen.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
       _tactiPen.transform.localScale = _leftHandHeld.lossyScale;
     }
+    return _tactiPad;
   }
 }
 }

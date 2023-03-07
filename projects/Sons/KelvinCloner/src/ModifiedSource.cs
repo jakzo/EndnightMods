@@ -61,13 +61,13 @@ public class _Robby {
         LocalPlayer.RobbyInteraction);
 
     This._tactiPad._onOrderFinished =
-        new Action(OnLocalPlayerGiveOrderFinished(This, interactedRobby));
-    This._tactiPad._onOrderCanceled =
-        new Action(OnLocalPlayerGiveOrderCancelled(This, interactedRobby));
+        new Action(() => OnLocalPlayerGiveOrderFinished(This, interactedRobby));
+    This._tactiPad._onOrderCanceled = new Action(
+        () => OnLocalPlayerGiveOrderCancelled(This, interactedRobby));
   }
 
-  public static Action
-  OnLocalPlayerGiveOrderFinished(Robby This, Robby interactedRobby) => () => {
+  public static void OnLocalPlayerGiveOrderFinished(Robby This,
+                                                    Robby interactedRobby) {
     // Get the selection from the interacted Robby's _tactiPad instead
     // var newPadState =
     //     This._tactiPad.GetSelection(0) == (int)CarouselName.DropLocation
@@ -81,10 +81,10 @@ public class _Robby {
     if (!This._actor._isDead && This._actor.IsDying())
       newPadState = PadState.Cancelling;
     LocalPlayerCloseTactipad(This, newPadState);
-  };
+  }
 
-  public static Action OnLocalPlayerGiveOrderCancelled(Robby This,
-                                                       Robby interactedRobby) =>
+  public static void OnLocalPlayerGiveOrderCancelled(Robby This,
+                                                     Robby interactedRobby) =>
       OnLocalPlayerGiveOrderFinished(This, interactedRobby);
 
   public static void LocalPlayerCloseTactipad(Robby This,
@@ -130,6 +130,27 @@ public class _Robby {
 public class _PlayerRobbyInteraction {
 
   public static RobbyWorldUi
-  CreatePadAndPenIfNeeded(PlayerRobbyInteraction This) {}
+  CreatePadAndPenIfNeeded(PlayerRobbyInteraction This) {
+    if (!This._tactiPad) {
+      This._tactiPad = GameObject.Instantiate(This._guiPrefab);
+      This._tactiPad.gameObject.active = false;
+      This._tactiPad.transform.parent = This._rightHandHeld;
+      This._tactiPad.transform.localPosition = Vector3.zero;
+      This._tactiPad.transform.localRotation = Quaternion.identity;
+      This._tactiPad.transform.localScale = This._rightHandHeld.lossyScale;
+      if (This._isRemote)
+        This._tactiPad.DisableUI();
+    }
+    if (!This._tactiPen) {
+      This._tactiPen = GameObject.Instantiate(This._penPrefab);
+      This._tactiPen.gameObject.active = false;
+      This._tactiPen.transform.parent = This._leftHandHeld;
+      // TODO: Figure out actual values here
+      This._tactiPen.transform.localPosition = Vector3.zero;
+      This._tactiPen.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+      This._tactiPen.transform.localScale = This._leftHandHeld.lossyScale;
+    }
+    return This._tactiPad;
+  }
 }
 }

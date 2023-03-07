@@ -57,50 +57,6 @@ public class OrderBroadcaster : MonoBehaviour {
     get => _listeningRobbies != null;
   }
 
-  private static void ListenForOrder(Robby robby, Robby interactedRobby) {
-    robby._isFirstInteraction = false;
-    robby._tactiPad = LocalPlayer.RobbyInteraction.CreatePadAndPenIfNeeded();
-    robby._tactiPad._onOrderFinished =
-        new Action(robby.OnLocalPlayerGiveOrderFinished);
-    robby._tactiPad._onOrderCanceled =
-        new Action(robby.OnLocalPlayerGiveOrderCancelled);
-    robby._originalFov = 0f;
-    robby._localPadState = Robby.PadState.Open;
-    robby._padStateChangeFrame = Time.frameCount;
-    // robby._tactiPad.Show(true); // is something in here necessary?
-    if (!BoltNetwork.isClient) {
-      robby.ServerStartTakingOrders(LocalPlayer.PlayerStimuli);
-      robby.DropNow();
-    }
-    robby.SendOrderEvent(Robby.OrderEventType.WaitForOrders,
-                         GlobalTargets.OnlyServer);
-  }
-
-  private static void StopListeningForOrder(Robby robby,
-                                            Robby interactedRobby) {
-    var newPadState = interactedRobby._tactiPad.GetSelection(0) ==
-                              (int)Robby.CarouselName.DropLocation
-                          ? Robby.PadState.LowerToGiveItem
-                          : Robby.PadState.GivingNote;
-    if (!robby._actor._isDead && robby._actor.IsDying())
-      newPadState = Robby.PadState.Cancelling;
-
-    robby._localPadState = newPadState;
-    robby._padStateChangeFrame = Time.frameCount;
-    robby._faceLerpTime = -1f;
-    var animation = newPadState == Robby.PadState.GivingNote
-                        ? AnimationHashes.RobbyPadGiveOrderFastHash
-                        : AnimationHashes.RobbyPadLowerHash;
-    robby.DoRobbyAnimatorFinishOrdersTransition(
-        newPadState == Robby.PadState.GivingNote, false);
-    if (BoltNetwork.isClient) {
-      robby.SendOrderEvent(newPadState == Robby.PadState.GivingNote
-                               ? Robby.OrderEventType.FinishOrderNoNote
-                               : Robby.OrderEventType.FinishOrderGiveNote,
-                           GlobalTargets.OnlyServer);
-    }
-  }
-
   private static void WithAllRobbies(Robby interactedRobby,
                                      Action<Robby, Robby> action) {
     Instance?.StartCoroutine(
@@ -130,7 +86,8 @@ public class OrderBroadcaster : MonoBehaviour {
       _listeningRobbies = GameObject.FindObjectsOfType<Robby>()
                               .Where(robby => robby != __instance)
                               .ToArray();
-      WithAllRobbies(__instance, ListenForOrder);
+      WithAllRobbies(__instance,
+                     ModifiedSource._Robby.LocalPlayerStartGivingOrders);
     }
   }
 
@@ -139,7 +96,13 @@ public class OrderBroadcaster : MonoBehaviour {
     [HarmonyPostfix()]
     internal static void Postfix(Robby __instance) {
       if (_isPreparingBroadcastOrder) {
-        // WithAllRobbies(__instance, StopListeningForOrder);
+        WithAllRobbies(__instance, (robby, interactedRobby) => {
+          // TODO: Copy relevant _tactiPad values
+          robby._tactiPad._selectedCarousel =
+              interactedRobby._tactiPad._selectedCarousel;
+          ModifiedSource._Robby.OnLocalPlayerGiveOrderFinished(robby,
+                                                               interactedRobby);
+        });
         _listeningRobbies = null;
         Log.Debug("Order was broadcast to all Kelvins");
       }
@@ -151,7 +114,8 @@ public class OrderBroadcaster : MonoBehaviour {
     [HarmonyPostfix()]
     internal static void Postfix(Robby __instance) {
       if (_isPreparingBroadcastOrder) {
-        // WithAllRobbies(__instance, StopListeningForOrder);
+        WithAllRobbies(__instance,
+                       ModifiedSource._Robby.OnLocalPlayerGiveOrderCancelled);
         _listeningRobbies = null;
         Log.Debug("Order broadcast was cancelled");
       }
